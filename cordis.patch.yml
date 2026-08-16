@@ -1,0 +1,10 @@
+# DSH bundle patch: inserts the plugin row into a profile roster.
+# Install: dsh plugin --profile <name> add github:<owner>/dsh-aliyundrive-plugin
+- insert:
+    - id: aliyundrive
+      name: dsh-aliyundrive-plugin
+      config:
+        aliyunpanBin: aliyunpan
+        timeoutMs: 60000
+        longRunningTimeoutMs: 3600000
+        confirmDangerous: true
