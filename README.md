@@ -16,7 +16,7 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin tha
 - Albums: list, show, batch download.
 - Sync: upload/download modes with exclusive/increment policies.
 - Long transfers run in background: poll with `aliyunpan_task_status`, list with `aliyunpan_task_list`, stop with `aliyunpan_task_stop`.
-- Web UI: an `阿里云盘` conversation tab exposes every tool as a dynamic form with quick account/quota/pwd actions, JSON results, and a live task panel.
+- Web UI: an `阿里云盘` conversation tab exposes every tool as a dynamic form with quick account/quota/pwd actions, JSON results, and a live task panel. A standalone page is also available at `/aliyundrive` after the web profile starts.
 - Dangerous operations require explicit confirmation.
 
 ## Use cases

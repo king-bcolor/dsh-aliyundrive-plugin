@@ -6,8 +6,20 @@
  * without going through the model loop.
  */
 
+import { STANDALONE_UI_HTML } from './standalone-ui.js'
+
 const API_PREFIX = '/api/aliyundrive'
+const UI_PATH = '/aliyundrive'
 const MAX_BODY_BYTES = 1024 * 1024
+
+function sendHtml(res, html) {
+  res.writeHead(200, {
+    'content-type': 'text/html; charset=utf-8',
+    'cache-control': 'no-store',
+    'x-content-type-options': 'nosniff',
+  })
+  res.end(html)
+}
 
 function sendJson(res, status, payload) {
   const body = JSON.stringify(payload)
@@ -58,6 +70,11 @@ export function createAliyundriveApi({ tools, taskManager }) {
   return async function aliyundriveApi(req, res) {
     const url = new URL(req.url ?? '/', 'http://localhost')
     const path = url.pathname
+
+    if ((req.method === 'GET' || req.method === 'HEAD') && (path === UI_PATH || path === `${UI_PATH}/`)) {
+      sendHtml(res, STANDALONE_UI_HTML)
+      return
+    }
 
     if (req.method === 'GET' && path === `${API_PREFIX}/tools`) {
       sendJson(res, 200, {
@@ -126,7 +143,10 @@ export function registerAliyundriveApi(ctx, deps) {
   // profiles that never provide it.
   if (typeof ctx.inject === 'function') {
     const fiber = ctx.inject(['webServer'], (webCtx) => {
-      webCtx.effect(() => webCtx.webServer.register(route), 'aliyundrive: http api')
+      webCtx.effect(() => {
+        webCtx.webServer.register(route)
+        webCtx.webServer.register({ kind: 'prefix', path: UI_PATH, handler })
+      }, 'aliyundrive: http api + standalone ui')
     })
     if (typeof ctx.effect === 'function') {
       ctx.effect(() => () => fiber.dispose(), 'aliyundrive: http api fiber')
@@ -138,5 +158,6 @@ export function registerAliyundriveApi(ctx, deps) {
   const webServer = typeof ctx.get === 'function' ? ctx.get('webServer') : undefined
   if (webServer === undefined || typeof webServer.register !== 'function') return () => {}
   webServer.register(route)
+  webServer.register({ kind: 'prefix', path: UI_PATH, handler })
   return () => {}
 }

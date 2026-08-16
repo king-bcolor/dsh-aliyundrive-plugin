@@ -1,6 +1,6 @@
 {
   "name": "dsh-aliyundrive-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DeepSeek Harness plugin wrapping the Alibaba Cloud Drive CLI (aliyunpan), with a web UI tab.",
   "type": "module",
   "main": "index.js",
@@ -9,7 +9,12 @@
     "./client": "./lib/client.js",
     "./package.json": "./package.json"
   },
-  "files": ["index.js", "cordis.patch.yml", "src", "lib"],
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "src",
+    "lib"
+  ],
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

@@ -16,7 +16,7 @@
 - 相册：列表、查看、批量下载。
 - 同步：upload/download 模式，exclusive/increment 策略。
 - 长传输后台运行：可用 `aliyunpan_task_status` 轮询、`aliyunpan_task_list` 列出、`aliyunpan_task_stop` 停止。
-- Web UI：会话内新增「阿里云盘」标签页，把 25 个工具全部渲染为动态表单，并提供账号/配额/当前目录快捷查询、JSON 结果和后台任务面板。
+- Web UI：会话内新增「阿里云盘」标签页，把 25 个工具全部渲染为动态表单，并提供账号/配额/当前目录快捷查询、JSON 结果和后台任务面板；Web 启动后也可直接访问 `/aliyundrive` 独立页面。
 - 危险操作默认需要显式确认。
 
 ## 用例
