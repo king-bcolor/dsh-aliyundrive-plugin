@@ -129,7 +129,9 @@ export function createAliyundriveTools(config, deps = {}) {
         (error) => {
           taskManager.failTask(taskId, error)
         },
-      )
+      ).catch(() => {
+        // Task-finalization is best-effort; never emit an unhandled rejection.
+      })
       return {
         ok: true,
         taskId,
