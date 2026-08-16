@@ -139,6 +139,22 @@ test('http api starts and lists long tasks', async () => {
   }
 })
 
+test('http api serves a standalone aliyundrive acceptance page', async () => {
+  const { handler } = createFixtures()
+  const { server, base } = await listen(handler)
+  try {
+    const response = await fetch(base + '/aliyundrive')
+    assert.equal(response.status, 200)
+    assert.match(response.headers.get('content-type') || '', /text\/html/)
+    const html = await response.text()
+    assert.match(html, /阿里云盘/)
+    assert.match(html, /aliyunpan_upload/)
+    assert.match(html, /api\/aliyundrive/)
+  } finally {
+    server.close()
+  }
+})
+
 test('http api returns 400 for malformed json and 404 for unknown routes', async () => {
   const { handler } = createFixtures()
   const { server, base } = await listen(handler)
@@ -176,9 +192,12 @@ test('registerAliyundriveApi mounts the route through an optional webServer inje
     get(name) { throw new Error('should not call ctx.get') },
   }
   const dispose = registerAliyundriveApi(ctx, { tools: [], taskManager: createTaskManager() })
-  assert.equal(routes.length, 1)
-  assert.equal(routes[0].kind, 'prefix')
-  assert.equal(routes[0].path, '/api/aliyundrive')
-  assert.equal(typeof routes[0].handler, 'function')
+  assert.equal(routes.length, 2)
+  const apiRoute = routes.find((route) => route.path === '/api/aliyundrive')
+  const uiRoute = routes.find((route) => route.path === '/aliyundrive')
+  assert.equal(apiRoute.kind, 'prefix')
+  assert.equal(typeof apiRoute.handler, 'function')
+  assert.equal(uiRoute.kind, 'prefix')
+  assert.equal(typeof uiRoute.handler, 'function')
   assert.equal(typeof dispose, 'function')
 })
