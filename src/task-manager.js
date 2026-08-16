@@ -1,9 +1,9 @@
 /**
  * In-memory long-task registry for upload/download/sync operations.
  *
- * The current runner executes aliyunpan synchronously and then records the
- * final state; the registry API is intentionally stable so a future
- * detached/background transport can update progress without changing tools.
+ * Background subprocess handles are attached to task records; status tools
+ * read live snapshots while the process is running and the final result once
+ * it exits.
  */
 
 let sequence = 0
