@@ -10,9 +10,17 @@ test('dsh-aliyundrive-plugin workspace is a valid DSH bundle', async () => {
   assert.equal(pkg.name, 'dsh-aliyundrive-plugin')
   assert.equal(pkg.type, 'module')
   assert.equal(pkg.main, 'index.js')
-  assert.deepEqual(pkg.dsh, { bundle: { patch: './cordis.patch.yml' } })
+  assert.deepEqual(pkg.dsh, {
+    bundle: { patch: './cordis.patch.yml' },
+    client: {
+      platform: 'web',
+      inject: ['@deepseek-ai/dsh-client-runtime', '@deepseek-ai/dsh-client-ui-conversation'],
+    },
+  })
   assert.ok(pkg.files.includes('index.js'))
   assert.ok(pkg.files.includes('cordis.patch.yml'))
+  assert.ok(pkg.files.includes('src'))
+  assert.ok(pkg.files.includes('lib'))
 })
 
 test('dsh-aliyundrive-plugin cordis.patch.yml inserts the plugin row', async () => {

@@ -258,3 +258,12 @@ test('aliyunpan_task_stop kills a running background task', async () => {
   assert.equal(deferreds[0].killed, true)
   assert.equal(taskManager.getTask(upload.taskId).status, 'stopping')
 })
+
+test('aliyunpan_login runs in background so the UI can poll for the auth link', async () => {
+  const { byName, startCalls } = createHarness()
+  const result = await byName.aliyunpan_login.execute({}, {})
+  assert.equal(result.ok, true)
+  assert.equal(result.status, 'running')
+  assert.match(result.taskId, /^aliyunpan_/)
+  assert.deepEqual(startCalls[0], ['login'])
+})
