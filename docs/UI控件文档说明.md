@@ -1,10 +1,14 @@
 # 阿里云盘命令行 DeepSeek Harness 插件 — UI 控件文档说明
 
+> 当前实现：`lib/client.js` 在 DSH Web 会话中注册 `conversation.view` 标签页「阿里云盘」，通过 `/api/aliyundrive` 直接执行宿主工具；表单由工具 JSON Schema 自动生成，因此全部 25 个工具都有 UI 入口。
+
 ## 1. 设计原则
 - 文件列表支持分页与路径导航。
 - 传输任务展示实时进度（参考 aliyunpan `-ui` 面板）。
 - 危险操作二次确认。
-- 所有工具结果可切换 JSON 视图。
+- 所有工具结果可切换 JSON 视图（当前实现始终显示 JSON）。
+- 动态表单：不维护第二套工具清单，`GET /api/aliyundrive/tools` 返回的参数 schema 直接驱动控件生成。
+- 长任务（登录/上传/下载/同步）不阻塞页面：执行立即返回 `taskId`，任务面板 2 秒轮询一次。
 
 ## 2. 控件清单
 | 控件 | 类型 | 用途 | 数据绑定 |

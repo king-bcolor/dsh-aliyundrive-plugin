@@ -2,7 +2,7 @@
 
 > **English README**：[README.md](./README.md)
 
-一个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件，把 [aliyunpan](https://github.com/tickstep/aliyunpan) 阿里云盘命令行工具封装为模型可调用的工具集。
+一个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件，把 [aliyunpan](https://github.com/tickstep/aliyunpan) 阿里云盘命令行工具封装为模型可调用的工具集，并内置 Web UI 标签页。
 
 ## 它是什么
 `dsh-aliyundrive-plugin` 把阿里云盘操作暴露给 DSH Agent：账号状态、网盘切换、目录浏览、文件管理、上传/下载进度、分享、相册、同步备份，全部通过结构化工具完成。
@@ -16,6 +16,7 @@
 - 相册：列表、查看、批量下载。
 - 同步：upload/download 模式，exclusive/increment 策略。
 - 长传输后台运行：可用 `aliyunpan_task_status` 轮询、`aliyunpan_task_list` 列出、`aliyunpan_task_stop` 停止。
+- Web UI：会话内新增「阿里云盘」标签页，把 25 个工具全部渲染为动态表单，并提供账号/配额/当前目录快捷查询、JSON 结果和后台任务面板。
 - 危险操作默认需要显式确认。
 
 ## 用例
@@ -48,7 +49,10 @@ dsh plugin --profile default add .
 ## 使用
 ```bash
 dsh --profile default
+# Web 模式
+dsh web
 ```
+进入会话后切换到「阿里云盘」标签页即可使用 UI。
 示例提示词：
 - `列出我备份盘根目录的文件。`
 - `把 ~/Documents 上传到 /我的文档。`

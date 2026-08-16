@@ -2,7 +2,7 @@
 
 > **中文文档**：[README.zh-CN.md](./README.zh-CN.md)
 
-A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin that wraps the [aliyunpan](https://github.com/tickstep/aliyunpan) Alibaba Cloud Drive CLI as model-callable tools.
+A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin that wraps the [aliyunpan](https://github.com/tickstep/aliyunpan) Alibaba Cloud Drive CLI as model-callable tools **and a built-in web UI tab**.
 
 ## What it is
 `dsh-aliyundrive-plugin` exposes Alibaba Cloud Drive operations to DSH agents: account status, drive switching, directory browsing, file management, upload/download with progress, sharing, albums, and sync backup — through structured tools.
@@ -16,6 +16,7 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin tha
 - Albums: list, show, batch download.
 - Sync: upload/download modes with exclusive/increment policies.
 - Long transfers run in background: poll with `aliyunpan_task_status`, list with `aliyunpan_task_list`, stop with `aliyunpan_task_stop`.
+- Web UI: an `阿里云盘` conversation tab exposes every tool as a dynamic form with quick account/quota/pwd actions, JSON results, and a live task panel.
 - Dangerous operations require explicit confirmation.
 
 ## Use cases
@@ -48,7 +49,10 @@ dsh plugin --profile default add .
 ## Usage
 ```bash
 dsh --profile default
+# or the web profile
+dsh web
 ```
+Open a conversation and switch to the `阿里云盘` tab for the UI.
 Example prompts:
 - `List files in the root of my backup drive.`
 - `Upload ~/Documents to /我的文档.`

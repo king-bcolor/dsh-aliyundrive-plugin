@@ -13,6 +13,7 @@ import { lastNonEmptyLine, parseLsLines, parsePwd, renderJson } from './render.j
 import { createTaskManager } from './task-manager.js'
 
 const LONG_RUNNING_TOOLS = new Set([
+  'aliyunpan_login',
   'aliyunpan_upload',
   'aliyunpan_download',
   'aliyunpan_sync_start',

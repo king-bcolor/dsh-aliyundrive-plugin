@@ -9,6 +9,7 @@
 import { normalizeConfig } from './src/config.js'
 import { createTaskManager } from './src/task-manager.js'
 import { createAliyundriveTools } from './src/tools.js'
+import { registerAliyundriveApi } from './src/http-api.js'
 
 export const name = 'aliyundrive'
 export const inject = ['tools']
@@ -27,4 +28,9 @@ export function apply(ctx = {}, rawConfig = {}) {
     // Cordis Context cannot be decorated without `provide`.
     ctx.aliyundrive = { config, taskManager, tools }
   }
+
+  // In web profiles this mounts the /api/aliyundrive HTTP bridge consumed by
+  // lib/client.js. In headless profiles ctx.get('webServer') is undefined and
+  // the registration is a no-op.
+  registerAliyundriveApi(ctx, { tools, taskManager })
 }

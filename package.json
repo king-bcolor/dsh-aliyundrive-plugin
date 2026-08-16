@@ -1,26 +1,47 @@
 {
   "name": "dsh-aliyundrive-plugin",
-  "version": "0.1.0",
-  "description": "DeepSeek Harness plugin wrapping the Alibaba Cloud Drive CLI (aliyunpan).",
+  "version": "0.1.1",
+  "description": "DeepSeek Harness plugin wrapping the Alibaba Cloud Drive CLI (aliyunpan), with a web UI tab.",
   "type": "module",
   "main": "index.js",
   "exports": {
-    ".": "./index.js"
+    ".": "./index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
   },
-  "files": ["index.js", "cordis.patch.yml", "src"],
+  "files": ["index.js", "cordis.patch.yml", "src", "lib"],
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
     }
   },
   "scripts": {
     "test": "node --test test/*.test.js"
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6"
+    "@deepseek-ai/dsh-client-runtime": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "react": "^18.2.0"
   },
   "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-client-runtime": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-conversation": {
+      "optional": true
+    },
     "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "react": {
       "optional": true
     }
   },
