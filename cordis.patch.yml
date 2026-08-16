@@ -1,5 +1,5 @@
 # DSH bundle patch: inserts the plugin row into a profile roster.
-# Install: dsh plugin --profile <name> add github:<owner>/dsh-aliyundrive-plugin
+# Install: dsh plugin --profile <name> add github:king-bcolor/dsh-aliyundrive-plugin
 - insert:
     - id: aliyundrive
       name: dsh-aliyundrive-plugin

@@ -34,13 +34,13 @@
 
 ### 从 GitHub 安装
 ```bash
-dsh plugin --profile default add github:<owner>/dsh-aliyundrive-plugin
+dsh plugin --profile default add github:king-bcolor/dsh-aliyundrive-plugin
 # 如 pnpm 请求构建许可，请在 profile 的 pnpm-workspace.yaml 中 allowBuilds 后重试
 ```
 
 ### 本地安装
 ```bash
-git clone https://github.com/<owner>/dsh-aliyundrive-plugin.git
+git clone https://github.com/king-bcolor/dsh-aliyundrive-plugin.git
 cd dsh-aliyundrive-plugin
 dsh plugin --profile default add .
 ```

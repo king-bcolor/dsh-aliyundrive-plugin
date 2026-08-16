@@ -34,13 +34,13 @@ See [docs/用例目录/README.md](./docs/用例目录/README.md) for the full co
 
 ### Install from GitHub
 ```bash
-dsh plugin --profile default add github:<owner>/dsh-aliyundrive-plugin
+dsh plugin --profile default add github:king-bcolor/dsh-aliyundrive-plugin
 # allowlist build in $DSH_HOME/profiles/default/pnpm-workspace.yaml if requested
 ```
 
 ### Install locally
 ```bash
-git clone https://github.com/<owner>/dsh-aliyundrive-plugin.git
+git clone https://github.com/king-bcolor/dsh-aliyundrive-plugin.git
 cd dsh-aliyundrive-plugin
 dsh plugin --profile default add .
 ```
